@@ -11,5 +11,4 @@ def extractDataToDataFrame (file):
     # Créer un DataFrame à partir du dictionnaire
     dataFrameFile = pd.DataFrame.from_dict(dataDict)
 
-    # Afficher les premières lignes du DataFrame
     return dataFrameFile
