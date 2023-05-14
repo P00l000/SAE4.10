@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import extractData
 import removeInconsistanteData
-
+import  splitDataFromDate
 import removeInconsistanteData
 import json
-
+import datetime
+import createDataFrameMinMaxMoy
 if __name__ == '__main__':
     #on recup les données et on les mets dans un dataFrame
     dataFrameWeather = extractData.extractDataToDataFrame('data/weather.json')
@@ -16,5 +17,8 @@ if __name__ == '__main__':
     dataFrameWeather['pressure'] = dataFrameWeather['pressure'].astype('int')
     dataFrameWeather['report_date'] = pd.to_datetime(dataFrameWeather['report_date'])
 
-    removeInconsistanteData.RemoveInconsistanteData(dataFrameWeather)
+    dataFrameNoError =removeInconsistanteData.RemoveInconsistanteData(dataFrameWeather)
+
+    MinPressureByYear=createDataFrameMinMaxMoy.createDataFrame('moy','saison',dataFrameNoError,'temp')
+    print(pd.DataFrame.from_dict(MinPressureByYear))
 

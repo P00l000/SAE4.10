@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+
 def extractDataToDataFrame (file):
     # Charger le fichier JSON
     with open(file, 'r') as f:
