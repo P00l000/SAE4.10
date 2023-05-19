@@ -1,12 +1,14 @@
 import splitDataFromDate
 import datetime
+import pandas as pd
 
-def createDataFrame(fct,typeDecoupage,df, parametre):
+def createDataFrameMinMaxMoy(fct,typeDecoupage,df, parametre):
     firstDataDate = df['report_date'].min()
     lastDataDate = df['report_date'].max()
-    saisons = ['a','h','p','e']
+    saisons = ['p','e','a','h']
     donnees = {typeDecoupage :[],
                parametre: [],}
+
     if typeDecoupage == 'annee':
         annee = int(firstDataDate.year)
         derniereAnnee = int(lastDataDate.year)
@@ -16,6 +18,7 @@ def createDataFrame(fct,typeDecoupage,df, parametre):
             donnees[typeDecoupage] += [annee]
             donnees[parametre] += [valeurfct]
             annee+=1
+
     if typeDecoupage == 'mois':
         annee = int(firstDataDate.year)
         mois = int(firstDataDate.month)
@@ -29,6 +32,7 @@ def createDataFrame(fct,typeDecoupage,df, parametre):
                 mois+=1
             mois=1
             annee+=1
+
     if typeDecoupage == 'saison':
         annee = int(firstDataDate.year)
         derniereAnnee = int(lastDataDate.year)
@@ -42,7 +46,7 @@ def createDataFrame(fct,typeDecoupage,df, parametre):
                 saison += 1
             saison = 1
             annee += 1
-    return donnees
+    return pd.DataFrame.from_dict(donnees)
 
 
 def ExecuteFct (df,fct,parametre ):

@@ -11,7 +11,7 @@ def foundDatesFromOption(typeDecoupage,date) :
     if ( typeDecoupage == 's'):
         date = date.split('-')
         if date[0] == 'h' :
-            date_debut = datetime.datetime.strptime('01/01/'+ date[1],'%d/%m/%Y')
+            date_debut = datetime.datetime.strptime('01/09/'+ date[1],'%d/%m/%Y')
             date_fin = datetime.datetime.strptime('01/03/'+ str(int(date[1])+1),'%d/%m/%Y')
         elif date[0] == 'a':
             date_debut = datetime.datetime.strptime('01/09/' + date[1], '%d/%m/%Y')

@@ -1,4 +1,5 @@
-
+import  splitDataFromDate as split
+import pandas as pd
 def RemoveInconsistanteData(dataFrame):
     #on regarde si il ya  des valeurs null (non)
     #print(dataFrame.isnull().values.any())
@@ -16,18 +17,22 @@ def RemoveInconsistanteData(dataFrame):
 
     #idem avec les pression
     minPressure=90000;
-    maxPressure=101000;
+    maxPressure=104000;
 
-
-    #On enleve le données incohérante par minMax
+    #On enleve les données incohérantes
     removeCondition = (dataFrame['humidity'] <= maxHumidity)
     dataFrameFiltred = dataFrame.loc[removeCondition]
+
 
     removeCondition = (dataFrameFiltred['pressure'] >= minPressure)
     dataFrameFiltred = dataFrameFiltred.loc[removeCondition]
 
     removeCondition = (dataFrameFiltred['pressure'] <= maxPressure)
     dataFrameFiltred = dataFrameFiltred.loc[removeCondition]
+
+    ##on regarde si les températures sont cohérantes par saisons
+    #dataFrameH2020 = split.SplitDataFromDate(dataFrameFiltred,'s','p-2020')
+    #print(dataFrameH2020.sort_values(by='temp', ascending=False))
 
 
     return dataFrameFiltred
